@@ -124,10 +124,10 @@ class Install extends Command
                     continue;
                 }
 
-                $reacter = $reactable->reacter()->create([
+                $reactant = $reactable->reactant()->create([
                     'type' => $reactable->getMorphClass(),
                 ]);
-                $reactable->setAttribute('love_reactant_id', $reacter->getKey());
+                $reactable->setAttribute('love_reactant_id', $reactant->getKey());
                 $reactable->save();
             }
         }
