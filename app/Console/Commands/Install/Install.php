@@ -6,7 +6,8 @@ namespace App\Console\Commands\Install;
 
 use App\Models\Post;
 use App\User;
-use Cog\Contracts\Love\ReactionType\Exceptions\ReactionTypeInvalid;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Console\Command;
 
@@ -74,35 +75,61 @@ class Install extends Command
 
     private function createReacters(): void
     {
-        /** @var \App\User[] $users */
-        $users = User::query()->get();
-        foreach ($users as $user) {
-            if ($user->love_reacter_id !== 0 && !is_null($user->love_reacter_id)) {
-                continue;
-            }
+//        $classes = get_declared_classes();
+        $classes = [
+            User::class,
+        ];
 
-            $reacter = $user->reacter()->create([
-                'type' => $user->getMorphClass(),
-            ]);
-            $user->setAttribute('love_reacter_id', $reacter->getKey());
-            $user->save();
+        $reacterableClasses = [];
+        foreach ($classes as $class) {
+            if (in_array(ReacterableContract::class, class_implements($class))) {
+                $reacterableClasses[] = $class;
+            }
+        }
+
+        foreach ($reacterableClasses as $class) {
+            $reacterables = $class::query()->get();
+            foreach ($reacterables as $reacterable) {
+                if ($reacterable->love_reacter_id !== 0 && !is_null($reacterable->love_reacter_id)) {
+                    continue;
+                }
+
+                $reacter = $reacterable->reacter()->create([
+                    'type' => $reacterable->getMorphClass(),
+                ]);
+                $reacterable->setAttribute('love_reacter_id', $reacter->getKey());
+                $reacterable->save();
+            }
         }
     }
 
     private function createReactants(): void
     {
-        /** @var \App\Models\Post[] $posts */
-        $posts = Post::query()->get();
-        foreach ($posts as $post) {
-            if ($post->love_reactant_id !== 0 && !is_null($post->love_reactant_id)) {
-                continue;
-            }
+//        $classes = get_declared_classes();
+        $classes = [
+            Post::class,
+        ];
 
-            $reactant = $post->reactant()->create([
-                'type' => $post->getMorphClass(),
-            ]);
-            $post->setAttribute('love_reactant_id', $reactant->getKey());
-            $post->save();
+        $reactableClasses = [];
+        foreach ($classes as $class) {
+            if (in_array(ReactableContract::class, class_implements($class))) {
+                $reactableClasses[] = $class;
+            }
+        }
+
+        foreach ($reactableClasses as $class) {
+            $reactables = $class::query()->get();
+            foreach ($reactables as $reactable) {
+                if ($reactable->love_reactant_id !== 0 && !is_null($reactable->love_reactant_id)) {
+                    continue;
+                }
+
+                $reacter = $reactable->reacter()->create([
+                    'type' => $reactable->getMorphClass(),
+                ]);
+                $reactable->setAttribute('love_reactant_id', $reacter->getKey());
+                $reactable->save();
+            }
         }
     }
 }
