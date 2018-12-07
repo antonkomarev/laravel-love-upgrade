@@ -19,7 +19,9 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/likes', 'Likes\Post\Action');
-Route::delete('/likes', 'Likes\Delete\Action');
 
 Route::get('/posts', 'Posts\Collect\Action');
+Route::middleware('auth')->group(function () {
+    Route::post('/likes', 'Likes\Post\Action');
+    Route::delete('/likes', 'Likes\Delete\Action');
+});

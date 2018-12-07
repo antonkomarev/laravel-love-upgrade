@@ -12,7 +12,7 @@
                         <div>
                             <cog-love-react-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-liked="@json(auth()->user()->getReacter()->isReactedTo($post->getReactant()))"
+                                :is-liked="@json(auth()->check() && auth()->user()->getReacter()->isReactedTo($post->getReactant()))"
                             >
                                 <i class="fas fa-heart"></i>
                             </cog-love-react-component>
