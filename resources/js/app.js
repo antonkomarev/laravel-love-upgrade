@@ -21,6 +21,7 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key)))
 
 Vue.component('cog-love-react-component', require('./components/Cog/Love/ReactComponent.vue'));
+Vue.component('cog-love-reaction-counter-component', require('./components/Cog/Love/ReactionCounterComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

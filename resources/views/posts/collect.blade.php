@@ -16,6 +16,9 @@
                             >
                                 <i class="fas fa-heart"></i>
                             </cog-love-react-component>
+                            <cog-love-reaction-counter-component
+                                count="{{ $post->likesCount }}"
+                            ></cog-love-reaction-counter-component>
                         </div>
                     </div>
                 </div>
