@@ -20,6 +20,13 @@
                                 count="{{ $post->likesCount }}"
                             ></cog-love-reaction-counter-component>
                         </div>
+                        <div>
+                            @foreach ($post->collectLikers() as $liker)
+                                <span class="badge-pill badge-secondary">
+                                    {{ $liker->name }}
+                                </span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             @endforeach
