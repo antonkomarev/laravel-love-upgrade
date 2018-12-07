@@ -4,12 +4,12 @@ declare(strict_types=1);
 
 namespace App\Console\Commands\Install;
 
-use App\Models\Post;
-use App\User;
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Console\Command;
+use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Support\Facades\DB;
 
 class Install extends Command
 {
@@ -76,15 +76,22 @@ class Install extends Command
     private function createReacters(): void
     {
 //        $classes = get_declared_classes();
-        $classes = [
-            User::class,
-        ];
+        $classes = $this->collectLikerTypes();
+        // TODO: Get User class from auth config
 
         $reacterableClasses = [];
         foreach ($classes as $class) {
-            if (in_array(ReacterableContract::class, class_implements($class))) {
-                $reacterableClasses[] = $class;
+            if (!class_exists($class)) {
+                $this->warn("Class `{$class}` is not found.");
+                continue;
             }
+
+            if (!in_array(ReacterableContract::class, class_implements($class))) {
+                $this->warn("Class `{$class}` need to implement Reacterable contract.");
+                continue;
+            }
+
+            $reacterableClasses[] = $class;
         }
 
         foreach ($reacterableClasses as $class) {
@@ -106,15 +113,26 @@ class Install extends Command
     private function createReactants(): void
     {
 //        $classes = get_declared_classes();
-        $classes = [
-            Post::class,
-        ];
+        $classes = $this->collectLikeableTypes();
 
         $reactableClasses = [];
         foreach ($classes as $class) {
-            if (in_array(ReactableContract::class, class_implements($class))) {
-                $reactableClasses[] = $class;
+            $actualClass = Relation::getMorphedModel($class);
+            if (!is_null($actualClass)) {
+                $class = $actualClass;
             }
+
+            if (!class_exists($class)) {
+                $this->warn("Class `{$class}` is not found.");
+                continue;
+            }
+
+            if (!in_array(ReactableContract::class, class_implements($class))) {
+                $this->warn("Class `{$class}` need to implement Reactable contract.");
+                continue;
+            }
+
+            $reactableClasses[] = $class;
         }
 
         foreach ($reactableClasses as $class) {
@@ -131,5 +149,30 @@ class Install extends Command
                 $reactable->save();
             }
         }
+    }
+
+    private function collectLikeableTypes(): iterable
+    {
+        /** @var \Illuminate\Database\Query\Builder $query */
+        $query = DB::query();
+        $types = $query
+            ->select('likeable_type')
+            ->from('love_likes')
+            ->groupBy('likeable_type')
+            ->get()
+            ->pluck('likeable_type');
+
+        return $types;
+    }
+
+    private function collectLikerTypes(): iterable
+    {
+        $guard = config('auth.defaults.guard');
+        $provider = config("auth.guards.{$guard}.provider");
+        $class = config("auth.providers.{$provider}.model");
+
+        return [
+            $class,
+        ];
     }
 }
