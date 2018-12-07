@@ -11,8 +11,8 @@
                         <div>{!! $post->body !!}</div>
                         <div>
                             <cog-love-react-component
-                                uri="/likes/?post_id={{ $post->id }}&author_id={{ auth('wink')->user()->id }}"
-                                :is-liked="@json($post->isLikedBy(auth('wink')->user()->id))"
+                                uri="/likes/?post_id={{ $post->id }}"
+                                :is-liked="@json($post->isLikedBy(auth()->id()))"
                             >
                                 <i class="fas fa-heart"></i>
                             </cog-love-react-component>

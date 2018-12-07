@@ -1,7 +1,7 @@
 <template>
     <button style="cursor: pointer;" class="btn btn-link" v-on:click="toggleLike()">
-        <i class="fas fa-heart" v-if="this.liked"></i>
-        <i class="far fa-heart" v-else="this.liked"></i>
+        <i class="fas fa-heart" v-if="this.liked">Unlike</i>
+        <i class="far fa-heart" v-else="this.liked">Like</i>
     </button>
 </template>
 

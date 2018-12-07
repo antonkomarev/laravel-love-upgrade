@@ -47465,8 +47465,8 @@ var render = function() {
     },
     [
       this.liked
-        ? _c("i", { staticClass: "fas fa-heart" })
-        : _c("i", { staticClass: "far fa-heart" })
+        ? _c("i", { staticClass: "fas fa-heart" }, [_vm._v("Unlike")])
+        : _c("i", { staticClass: "far fa-heart" }, [_vm._v("Like")])
     ]
   )
 }
