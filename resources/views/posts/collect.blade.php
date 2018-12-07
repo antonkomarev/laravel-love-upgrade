@@ -20,6 +20,13 @@
                                 count="{{ $post->getReactant()->getReactionSummary()->getTotalCount() }}"
                             ></cog-love-reaction-counter-component>
                         </div>
+                        <div>
+                            @foreach ($post->getReactant()->getReactions() as $reaction)
+                                <span class="badge-pill badge-secondary">
+                                    {{ $reaction->getReacter()->getReacterable()->name }}
+                                </span>
+                            @endforeach
+                        </div>
                     </div>
                 </div>
             @endforeach
