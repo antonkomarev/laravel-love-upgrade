@@ -10,7 +10,6 @@ class Action extends Controller
 {
     public function __invoke(Request $request)
     {
-        /** @var \App\Models\Post[] $posts */
         $posts = Post::query()
             ->with('tags')
             ->live()
