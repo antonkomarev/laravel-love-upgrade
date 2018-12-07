@@ -51,17 +51,20 @@ class Install extends Command
 
     private function createReactionTypes(): void
     {
-        $names = [
-            'Like',
-            'Dislike',
-        ];
-
+        $names = $this->collectLikeTypes();
         $weights = [
             'Like' => 1,
             'Dislike' => -1,
         ];
 
         foreach ($names as $name) {
+            $name = studly_case(strtolower($name));
+
+            if (!isset($weights[$name])) {
+                $this->warn("Reaction weight for type `{$name}` not found.");
+                continue;
+            }
+
             if (ReactionType::query()->where('name', $name)->exists()) {
                 continue;
             }
@@ -174,5 +177,19 @@ class Install extends Command
         return [
             $class,
         ];
+    }
+
+    private function collectLikeTypes(): iterable
+    {
+        /** @var \Illuminate\Database\Query\Builder $query */
+        $query = DB::query();
+        $types = $query
+            ->select('type_id')
+            ->from('love_likes')
+            ->groupBy('type_id')
+            ->get()
+            ->pluck('type_id');
+
+        return $types;
     }
 }
