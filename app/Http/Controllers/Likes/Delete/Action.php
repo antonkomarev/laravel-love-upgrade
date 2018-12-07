@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Likes\Delete;
 
 use App\Http\Controllers\Controller;
+use App\Models\Author;
 use App\Models\Post;
 use Illuminate\Http\Request;
 
