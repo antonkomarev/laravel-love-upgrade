@@ -12,12 +12,12 @@
                         <div>
                             <cog-love-react-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-liked="@json($post->isLikedBy(auth()->id()))"
+                                :is-liked="@json(auth()->user()->getReacter()->isReactedTo($post->getReactant()))"
                             >
                                 <i class="fas fa-heart"></i>
                             </cog-love-react-component>
                             <cog-love-reaction-counter-component
-                                count="{{ $post->likesCount }}"
+                                count="{{ $post->getReactant()->getReactionSummary()->getTotalCount() }}"
                             ></cog-love-reaction-counter-component>
                         </div>
                     </div>

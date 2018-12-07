@@ -2,16 +2,16 @@
 
 namespace App;
 
-use Cog\Contracts\Love\Liker\Models\Liker as LikerContract;
-use Cog\Laravel\Love\Liker\Models\Traits\Liker;
+use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
+use Cog\Laravel\Love\Reacterable\Models\Traits\Reacterable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Authenticatable implements LikerContract
+class User extends Authenticatable implements ReacterableContract
 {
     use Notifiable;
-    use Liker;
+    use Reacterable;
 
     /**
      * The attributes that are mass assignable.
