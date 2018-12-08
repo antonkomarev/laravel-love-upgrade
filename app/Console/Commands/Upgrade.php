@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Console\Commands\Install;
+namespace App\Console\Commands;
 
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
@@ -12,21 +12,21 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\DB;
 
-class Install extends Command
+class Upgrade extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'love:install';
+    protected $signature = 'love:upgrade';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Install package';
+    protected $description = 'Upgrade love package from v5 to v6';
 
     /**
      * Create a new command instance.
@@ -43,7 +43,7 @@ class Install extends Command
      *
      * @return void
      */
-    public function handle()
+    public function handle(): void
     {
         $this->createReactionTypes();
         $this->createReacters();
@@ -80,7 +80,6 @@ class Install extends Command
 
     private function createReacters(): void
     {
-//        $classes = get_declared_classes();
         $classes = $this->collectLikerTypes();
         // TODO: Get User class from auth config
 
@@ -117,7 +116,6 @@ class Install extends Command
 
     private function createReactants(): void
     {
-//        $classes = get_declared_classes();
         $classes = $this->collectLikeableTypes();
 
         $reactableClasses = [];
