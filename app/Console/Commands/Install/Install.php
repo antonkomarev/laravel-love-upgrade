@@ -6,6 +6,7 @@ namespace App\Console\Commands\Install;
 
 use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
 use Cog\Contracts\Love\Reacterable\Models\Reacterable as ReacterableContract;
+use Cog\Laravel\Love\Reaction\Models\Reaction;
 use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Relations\Relation;
@@ -47,6 +48,7 @@ class Install extends Command
         $this->createReactionTypes();
         $this->createReacters();
         $this->createReactants();
+        $this->convertLikesToReactions();
     }
 
     private function createReactionTypes(): void
@@ -58,7 +60,7 @@ class Install extends Command
         ];
 
         foreach ($names as $name) {
-            $name = studly_case(strtolower($name));
+            $name = $this->reactionTypeNameFromLikeTypeName($name);
 
             if (!isset($weights[$name])) {
                 $this->warn("Reaction weight for type `{$name}` not found.");
@@ -154,6 +156,65 @@ class Install extends Command
         }
     }
 
+    private function convertLikesToReactions(): void
+    {
+        /** @var \Illuminate\Database\Query\Builder $query */
+        $query = DB::query();
+        $likes = $query
+            ->select('*')
+            ->from('love_likes')
+            ->get();
+
+        foreach ($likes as $like) {
+            $class = $like->likeable_type;
+            $actualClass = Relation::getMorphedModel($class);
+            if (!is_null($actualClass)) {
+                $class = $actualClass;
+            }
+
+            if (!class_exists($class)) {
+                $this->warn("Class `{$class}` is not found.");
+                continue;
+            }
+
+            $reactable = $class::whereKey($like->likeable_id)->firstOrFail();
+
+            $userClass = $this->getUserClass();
+
+            if (!class_exists($class)) {
+                $this->warn("Class `{$userClass}` is not found.");
+                continue;
+            }
+
+            $reacterable = $userClass::whereKey($like->user_id)->firstOrFail();
+            $reactionTypeName = $this->reactionTypeNameFromLikeTypeName($like->type_id);
+
+            $reactionTypeId = ReactionType::fromName($reactionTypeName)->getKey();
+            $reactantId = $reactable->getReactant()->getKey();
+            $reacterId = $reacterable->getReacter()->getKey();
+
+            $isReactionExists = Reaction::query()
+                ->where('reaction_type_id', $reactionTypeId)
+                ->where('reactant_id', $reactantId)
+                ->where('reacter_id', $reacterId)
+                ->exists();
+
+            if ($isReactionExists) {
+                continue;
+            }
+
+            $reaction = new Reaction();
+            $reaction->forceFill([
+                'reaction_type_id' => $reactionTypeId,
+                'reactant_id' => $reactantId,
+                'reacter_id' => $reacterId,
+                'created_at' => $like->created_at,
+                'updated_at' => $like->updated_at,
+            ]);
+            $reaction->save();
+        }
+    }
+
     private function collectLikeableTypes(): iterable
     {
         /** @var \Illuminate\Database\Query\Builder $query */
@@ -170,12 +231,8 @@ class Install extends Command
 
     private function collectLikerTypes(): iterable
     {
-        $guard = config('auth.defaults.guard');
-        $provider = config("auth.guards.{$guard}.provider");
-        $class = config("auth.providers.{$provider}.model");
-
         return [
-            $class,
+            $this->getUserClass(),
         ];
     }
 
@@ -191,5 +248,19 @@ class Install extends Command
             ->pluck('type_id');
 
         return $types;
+    }
+
+    private function getUserClass(): string
+    {
+        $guard = config('auth.defaults.guard');
+        $provider = config("auth.guards.{$guard}.provider");
+        $class = config("auth.providers.{$provider}.model") ?? '';
+
+        return $class;
+    }
+
+    private function reactionTypeNameFromLikeTypeName(string $name): string
+    {
+        return studly_case(strtolower($name));
     }
 }
