@@ -163,6 +163,7 @@ class Install extends Command
         $likes = $query
             ->select('*')
             ->from('love_likes')
+            ->orderBy('created_at', 'asc')
             ->get();
 
         foreach ($likes as $like) {
