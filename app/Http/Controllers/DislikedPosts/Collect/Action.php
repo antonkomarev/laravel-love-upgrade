@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FavoritePosts\Collect;
+namespace App\Http\Controllers\DislikedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -11,14 +11,15 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->whereLikedBy($request->user()->id)
+            ->whereDislikedBy($request->user()->id)
             ->with('tags', 'likesCounter', 'likes', 'dislikesCounter', 'dislikes')
             ->live()
             ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
-            'title' => 'Favorite Posts',
+            'title' => 'Posts I dislike',
+            'description' => 'Posts disliked by the user',
             'posts' => $posts,
         ]);
     }

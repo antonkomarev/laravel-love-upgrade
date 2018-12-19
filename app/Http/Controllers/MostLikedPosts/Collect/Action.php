@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FreshPosts\Collect;
+namespace App\Http\Controllers\MostLikedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -13,12 +13,12 @@ class Action extends Controller
         $posts = Post::query()
             ->with('tags', 'likesCounter', 'likes', 'dislikesCounter', 'dislikes')
             ->live()
-            ->orderBy('publish_date', 'desc')
+            ->orderByLikesCount('desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
-            'title' => 'Fresh Posts',
-            'description' => 'Posts sorted by publish date from new to old',
+            'title' => 'Most Liked Posts',
+            'description' => 'Posts sorted descending by total likes reactions count',
             'posts' => $posts,
         ]);
     }
