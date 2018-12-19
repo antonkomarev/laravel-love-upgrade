@@ -31,6 +31,9 @@
                                 active-text="Undislike"
                                 inactive-text="Dislike"
                             ></cog-love-reaction-component>
+                            <cog-love-reaction-weight-component
+                                :weight="{{ $post->getReactant()->getReactionSummary()->getTotalWeight() }}"
+                            ></cog-love-reaction-weight-component>
                         </div>
                         <div>
                             @foreach ($post->getReactant()->getReactions() as $reaction)

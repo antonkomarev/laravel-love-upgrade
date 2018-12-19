@@ -35,13 +35,22 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/freshPosts">{{ __('Fresh Posts') }}</a>
+                            <a class="nav-link" href="/freshPosts">{{ __('Fresh') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/popularPosts">{{ __('Popular Posts') }}</a>
+                            <a class="nav-link" href="/popularPosts">{{ __('Popular') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/favoritePosts">{{ __('Favorite Posts') }}</a>
+                            <a class="nav-link" href="/worstPosts">{{ __('Worst') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mostLikedPosts">{{ __('Most Liked') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/mostDislikedPosts">{{ __('Most Disliked') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/favoritePosts">{{ __('Favorite') }}</a>
                         </li>
                     </ul>
 
