@@ -12,7 +12,7 @@ class Action extends Controller
     {
         $posts = Post::query()
             ->whereReactedBy($request->user()->getReacter())
-            ->with('tags', 'reactant.reactions.reacter.reacterable')
+            ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
             ->live()
             ->orderBy('publish_date', 'DESC')
             ->simplePaginate(50);
