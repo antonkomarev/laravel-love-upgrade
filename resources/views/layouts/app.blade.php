@@ -24,7 +24,7 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="/freshPosts">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -35,22 +35,22 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="/freshPosts">{{ __('Fresh') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/popularPosts">{{ __('Popular') }}</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/worstPosts">{{ __('Worst') }}</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link" href="/mostLikedPosts">{{ __('Most Liked') }}</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/mostDislikedPosts">{{ __('Most Disliked') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/favoritePosts">{{ __('Favorite') }}</a>
+                            <a class="nav-link" href="/mostReactedPosts">{{ __('Most Reacted') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leastReactedPosts">{{ __('Least Reacted') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/popularPosts">{{ __('Popular') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/worstPosts">{{ __('Worst') }}</a>
                         </li>
                     </ul>
 
@@ -73,6 +73,14 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/likedPosts">
+                                        <i class="fas fa-thumbs-up"></i>
+                                        {{ __('Posts I like') }}
+                                    </a>
+                                    <a class="dropdown-item" href="/dislikedPosts">
+                                        <i class="fas fa-thumbs-down"></i>
+                                        {{ __('Posts I dislike') }}
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">

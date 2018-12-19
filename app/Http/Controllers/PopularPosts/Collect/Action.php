@@ -19,6 +19,7 @@ class Action extends Controller
 
         return view('posts.collect', [
             'title' => 'Popular Posts',
+            'description' => 'Posts sorted descending by total reactions weight (likes - dislikes)',
             'posts' => $posts,
         ]);
     }

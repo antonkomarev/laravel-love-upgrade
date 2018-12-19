@@ -18,6 +18,7 @@ class Action extends Controller
 
         return view('posts.collect', [
             'title' => 'Fresh Posts',
+            'description' => 'Posts sorted by publish date from new to old',
             'posts' => $posts,
         ]);
     }

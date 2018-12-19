@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <h1 class="text-center">{{ $title }}</h1>
+    <h5 class="text-center">{{ $description }}</h5>
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($posts as $post)

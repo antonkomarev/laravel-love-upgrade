@@ -20,6 +20,7 @@ class Action extends Controller
 
         return view('posts.collect', [
             'title' => 'Most Disliked Posts',
+            'description' => 'Posts sorted descending by total dislikes reactions count',
             'posts' => $posts,
         ]);
     }

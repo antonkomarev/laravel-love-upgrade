@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Http\Controllers\MostLikedPosts\Collect;
+namespace App\Http\Controllers\LeastReactedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 
 class Action extends Controller
@@ -12,15 +11,15 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->withReactionCounterOfType(ReactionType::fromName('Like'))
+            ->withReactionSummary()
             ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
             ->live()
-            ->orderBy('reactions_count', 'desc')
+            ->orderBy('reactions_total_count', 'asc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
-            'title' => 'Most Liked Posts',
-            'description' => 'Posts sorted descending by total likes reactions count',
+            'title' => 'Least Reacted Posts',
+            'description' => 'Posts sorted ascending by total reactions count (likes + dislikes)',
             'posts' => $posts,
         ]);
     }

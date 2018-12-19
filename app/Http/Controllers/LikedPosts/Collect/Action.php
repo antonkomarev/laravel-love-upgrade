@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\FavoritePosts\Collect;
+namespace App\Http\Controllers\LikedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -19,7 +19,8 @@ class Action extends Controller
             ->simplePaginate(50);
 
         return view('posts.collect', [
-            'title' => 'Favorite Posts',
+            'title' => 'Posts I like',
+            'description' => 'Posts liked by the user',
             'posts' => $posts,
         ]);
     }

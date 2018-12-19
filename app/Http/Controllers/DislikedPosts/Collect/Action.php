@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\MostLikedPosts\Collect;
+namespace App\Http\Controllers\DislikedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -12,15 +12,15 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->withReactionCounterOfType(ReactionType::fromName('Like'))
+            ->whereReactedWithTypeBy($request->user()->getReacter(), ReactionType::fromName('Dislike'))
             ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
             ->live()
-            ->orderBy('reactions_count', 'desc')
+            ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
-            'title' => 'Most Liked Posts',
-            'description' => 'Posts sorted descending by total likes reactions count',
+            'title' => 'Posts I dislike',
+            'description' => 'Posts disliked by the user',
             'posts' => $posts,
         ]);
     }
