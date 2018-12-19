@@ -20,10 +20,13 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/favoritePosts', 'FavoritePosts\Collect\Action');
 Route::get('/freshPosts', 'FreshPosts\Collect\Action');
 Route::get('/popularPosts', 'PopularPosts\Collect\Action');
 Route::middleware('auth')->group(function () {
+    Route::get('/favoritePosts', 'FavoritePosts\Collect\Action');
+
     Route::post('/likes', 'Likes\Post\Action');
     Route::delete('/likes', 'Likes\Delete\Action');
+    Route::post('/dislikes', 'Dislikes\Post\Action');
+    Route::delete('/dislikes', 'Dislikes\Delete\Action');
 });

@@ -12,7 +12,7 @@ class Action extends Controller
     {
         $posts = Post::query()
             ->whereLikedBy($request->user()->id)
-            ->with('tags', 'likesCounter', 'likes')
+            ->with('tags', 'likesCounter', 'likes', 'dislikesCounter', 'dislikes')
             ->live()
             ->orderBy('publish_date', 'DESC')
             ->simplePaginate(50);

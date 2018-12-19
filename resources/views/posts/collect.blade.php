@@ -10,21 +10,37 @@
                     <div class="card-body">
                         <h1>{{ $post->title }}</h1>
                         <div>{!! $post->body !!}</div>
-                        <div>
-                            <cog-love-react-component
+                        <div class="my-2">
+                            <cog-love-reaction-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-liked="@json(auth()->check() && auth()->user()->hasLiked($post))"
-                            >
-                                <i class="fas fa-heart"></i>
-                            </cog-love-react-component>
-                            <cog-love-reaction-counter-component
-                                count="{{ $post->likesCount }}"
-                            ></cog-love-reaction-counter-component>
+                                :is-reacted="@json(auth()->check() && auth()->user()->hasLiked($post))"
+                                :reaction-count="{{ $post->likesCount }}"
+                                active-icon="fas fa-thumbs-up"
+                                inactive-icon="far fa-thumbs-up"
+                                button-class="btn btn-outline-success"
+                                active-text="Unlike"
+                                inactive-text="Like"
+                            ></cog-love-reaction-component>
+                            <cog-love-reaction-component
+                                uri="/dislikes/?post_id={{ $post->id }}"
+                                :is-reacted="@json(auth()->check() && auth()->user()->hasDisliked($post))"
+                                :reaction-count="{{ $post->dislikesCount }}"
+                                active-icon="fas fa-thumbs-down"
+                                inactive-icon="far fa-thumbs-down"
+                                button-class="btn btn-outline-danger"
+                                active-text="Undislike"
+                                inactive-text="Dislike"
+                            ></cog-love-reaction-component>
                         </div>
                         <div>
                             @foreach ($post->collectLikers() as $liker)
-                                <span class="badge-pill badge-secondary">
+                                <span class="badge-pill badge-success">
                                     {{ $liker->name }}
+                                </span>
+                            @endforeach
+                            @foreach ($post->collectDislikers() as $disliker)
+                                <span class="badge-pill badge-danger">
+                                    {{ $disliker->name }}
                                 </span>
                             @endforeach
                         </div>
