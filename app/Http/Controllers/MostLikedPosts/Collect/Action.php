@@ -18,7 +18,7 @@ class Action extends Controller
                 'reactant.reactions.reacter.reacterable',
                 'reactant.reactions.type',
                 'reactant.reactionCounters',
-                'reactant.reactionSummary',
+                'reactant.reactionTotal',
             ])
             ->live()
             ->orderBy('reactions_count', 'desc')

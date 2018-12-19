@@ -11,13 +11,13 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->withReactionSummary()
+            ->withReactionTotal()
             ->with([
                 'tags',
                 'reactant.reactions.reacter.reacterable',
                 'reactant.reactions.type',
                 'reactant.reactionCounters',
-                'reactant.reactionSummary',
+                'reactant.reactionTotal',
             ])
             ->live()
             ->orderBy('reactions_total_count', 'desc')

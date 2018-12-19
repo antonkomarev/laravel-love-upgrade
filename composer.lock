@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cybercog/laravel-love.git",
-                "reference": "b1df9a97a883a5725909c2c8ba621f79cd423a45"
+                "reference": "33504d7909fd630440538399aead1a8a2946e2dc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/b1df9a97a883a5725909c2c8ba621f79cd423a45",
-                "reference": "b1df9a97a883a5725909c2c8ba621f79cd423a45",
+                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/33504d7909fd630440538399aead1a8a2946e2dc",
+                "reference": "33504d7909fd630440538399aead1a8a2946e2dc",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "trait",
                 "undislike"
             ],
-            "time": "2018-12-19T18:34:58+00:00"
+            "time": "2018-12-19T19:58:30+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
