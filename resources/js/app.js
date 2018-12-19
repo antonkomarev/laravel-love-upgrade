@@ -22,7 +22,7 @@ window.Vue = require('vue');
 
 Vue.component('cog-love-reaction-component', require('./components/Cog/Love/ReactionComponent.vue'));
 Vue.component('cog-love-reaction-counter-component', require('./components/Cog/Love/ReactionCounterComponent.vue'));
-Vue.component('cog-love-reaction-weight-component', require('./components/Cog/Love/ReactionWeightComponent.vue'));
+Vue.component('cog-love-reaction-total-component', require('./components/Cog/Love/ReactionTotalComponent.vue'));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
