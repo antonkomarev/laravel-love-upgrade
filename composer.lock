@@ -12,12 +12,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/cybercog/laravel-love.git",
-                "reference": "09d6f8ed51cd8df1a62204ead6c21296a0a1c125"
+                "reference": "b1df9a97a883a5725909c2c8ba621f79cd423a45"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/09d6f8ed51cd8df1a62204ead6c21296a0a1c125",
-                "reference": "09d6f8ed51cd8df1a62204ead6c21296a0a1c125",
+                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/b1df9a97a883a5725909c2c8ba621f79cd423a45",
+                "reference": "b1df9a97a883a5725909c2c8ba621f79cd423a45",
                 "shasum": ""
             },
             "require": {
@@ -86,7 +86,7 @@
                 "trait",
                 "undislike"
             ],
-            "time": "2018-12-19T02:10:25+00:00"
+            "time": "2018-12-19T18:34:58+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -1322,16 +1322,16 @@
         },
         {
             "name": "nexmo/client",
-            "version": "1.5.2",
+            "version": "1.6.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Nexmo/nexmo-php.git",
-                "reference": "f192c84ec3cc3e2657fc754e0da1a17e39ac5542"
+                "reference": "01809cc1e17a5af275913c49bb5d444eb6cc06d4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Nexmo/nexmo-php/zipball/f192c84ec3cc3e2657fc754e0da1a17e39ac5542",
-                "reference": "f192c84ec3cc3e2657fc754e0da1a17e39ac5542",
+                "url": "https://api.github.com/repos/Nexmo/nexmo-php/zipball/01809cc1e17a5af275913c49bb5d444eb6cc06d4",
+                "reference": "01809cc1e17a5af275913c49bb5d444eb6cc06d4",
                 "shasum": ""
             },
             "require": {
@@ -1366,7 +1366,7 @@
                 }
             ],
             "description": "PHP Client for using Nexmo's API.",
-            "time": "2018-11-14T14:12:22+00:00"
+            "time": "2018-12-17T10:47:50+00:00"
         },
         {
             "name": "nikic/php-parser",
