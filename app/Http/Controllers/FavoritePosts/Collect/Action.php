@@ -15,7 +15,7 @@ class Action extends Controller
             ->whereReactedWithTypeBy($request->user()->getReacter(), ReactionType::fromName('Like'))
             ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
             ->live()
-            ->orderBy('publish_date', 'DESC')
+            ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
