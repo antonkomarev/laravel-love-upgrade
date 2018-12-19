@@ -32,9 +32,10 @@
                                 active-text="Undislike"
                                 inactive-text="Dislike"
                             ></cog-love-reaction-component>
-                            <cog-love-reaction-weight-component
+                            <cog-love-reaction-total-component
+                                :count="{{ $post->likesAndDislikes->count() }}"
                                 :weight="{{ $post->likesDiffDislikesCount }}"
-                            ></cog-love-reaction-weight-component>
+                            ></cog-love-reaction-total-component>
                         </div>
                         <div>
                             @foreach ($post->collectLikers() as $liker)

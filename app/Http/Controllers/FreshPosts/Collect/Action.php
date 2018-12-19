@@ -11,7 +11,14 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('tags', 'likesCounter', 'likes', 'dislikesCounter', 'dislikes')
+            ->with([
+                'tags',
+                'likes',
+                'dislikes',
+                'likesAndDislikes',
+                'likesCounter',
+                'dislikesCounter',
+            ])
             ->live()
             ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);

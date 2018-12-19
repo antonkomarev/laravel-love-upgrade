@@ -45,6 +45,11 @@ class CreateLoveLikesTable extends Migration
                 'user_id',
             ], 'like_user_unique');
 
+            $table->index([
+                'likeable_type',
+                'likeable_id',
+            ]);
+
             // $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }

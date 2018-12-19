@@ -44,6 +44,11 @@ class CreateLoveLikeCountersTable extends Migration
                 'likeable_type',
                 'type_id',
             ], 'like_counter_unique');
+
+            $table->index([
+                'likeable_type',
+                'likeable_id',
+            ]);
         });
     }
 

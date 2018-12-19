@@ -14059,7 +14059,7 @@ window.Vue = __webpack_require__(37);
 
 Vue.component('cog-love-reaction-component', __webpack_require__(51));
 Vue.component('cog-love-reaction-counter-component', __webpack_require__(43));
-Vue.component('cog-love-reaction-weight-component', __webpack_require__(54));
+Vue.component('cog-love-reaction-total-component', __webpack_require__(57));
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -47624,15 +47624,18 @@ if (false) {
 }
 
 /***/ }),
-/* 54 */
+/* 54 */,
+/* 55 */,
+/* 56 */,
+/* 57 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var disposed = false
 var normalizeComponent = __webpack_require__(11)
 /* script */
-var __vue_script__ = __webpack_require__(55)
+var __vue_script__ = __webpack_require__(58)
 /* template */
-var __vue_template__ = __webpack_require__(56)
+var __vue_template__ = __webpack_require__(59)
 /* template functional */
 var __vue_template_functional__ = false
 /* styles */
@@ -47649,7 +47652,7 @@ var Component = normalizeComponent(
   __vue_scopeId__,
   __vue_module_identifier__
 )
-Component.options.__file = "resources/js/components/Cog/Love/ReactionWeightComponent.vue"
+Component.options.__file = "resources/js/components/Cog/Love/ReactionTotalComponent.vue"
 
 /* hot reload */
 if (false) {(function () {
@@ -47658,9 +47661,9 @@ if (false) {(function () {
   if (!hotAPI.compatible) return
   module.hot.accept()
   if (!module.hot.data) {
-    hotAPI.createRecord("data-v-7f9e435e", Component.options)
+    hotAPI.createRecord("data-v-1ce00230", Component.options)
   } else {
-    hotAPI.reload("data-v-7f9e435e", Component.options)
+    hotAPI.reload("data-v-1ce00230", Component.options)
   }
   module.hot.dispose(function (data) {
     disposed = true
@@ -47671,7 +47674,7 @@ module.exports = Component.exports
 
 
 /***/ }),
-/* 55 */
+/* 58 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -47683,9 +47686,16 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     props: {
+        count: {
+            type: Number,
+            required: false
+        },
         weight: {
             type: Number,
             required: false
@@ -47694,7 +47704,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 });
 
 /***/ }),
-/* 56 */
+/* 59 */
 /***/ (function(module, exports, __webpack_require__) {
 
 var render = function() {
@@ -47702,6 +47712,13 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("button", { staticClass: "btn" }, [
+    _c("i", { staticClass: "fas fa-burn" }),
+    _vm._v(" "),
+    _c("span", {
+      staticClass: "badge",
+      domProps: { textContent: _vm._s(this.count) }
+    }),
+    _vm._v(" "),
     _c("i", { staticClass: "fas fa-balance-scale" }),
     _vm._v(" "),
     _c("span", {
@@ -47716,7 +47733,7 @@ module.exports = { render: render, staticRenderFns: staticRenderFns }
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-    require("vue-hot-reload-api")      .rerender("data-v-7f9e435e", module.exports)
+    require("vue-hot-reload-api")      .rerender("data-v-1ce00230", module.exports)
   }
 }
 
