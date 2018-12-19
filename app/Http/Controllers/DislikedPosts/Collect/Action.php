@@ -13,7 +13,13 @@ class Action extends Controller
     {
         $posts = Post::query()
             ->whereReactedWithTypeBy($request->user()->getReacter(), ReactionType::fromName('Dislike'))
-            ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
+            ->with([
+                'tags',
+                'reactant.reactions.reacter.reacterable',
+                'reactant.reactions.type',
+                'reactant.reactionCounters',
+                'reactant.reactionSummary',
+            ])
             ->live()
             ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);

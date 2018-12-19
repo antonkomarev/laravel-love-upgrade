@@ -13,7 +13,13 @@ class Action extends Controller
     {
         $posts = Post::query()
             ->withReactionCounterOfType(ReactionType::fromName('Dislike'))
-            ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
+            ->with([
+                'tags',
+                'reactant.reactions.reacter.reacterable',
+                'reactant.reactions.type',
+                'reactant.reactionCounters',
+                'reactant.reactionSummary',
+            ])
             ->live()
             ->orderBy('reactions_count', 'desc')
             ->simplePaginate(50);

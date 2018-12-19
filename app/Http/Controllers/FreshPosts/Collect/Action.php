@@ -11,7 +11,13 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('tags', 'reactant.reactions.reacter.reacterable', 'reactant.reactions.type')
+            ->with([
+                'tags',
+                'reactant.reactions.reacter.reacterable',
+                'reactant.reactions.type',
+                'reactant.reactionCounters',
+                'reactant.reactionSummary',
+            ])
             ->live()
             ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);
