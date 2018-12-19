@@ -20,7 +20,9 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
-Route::get('/posts', 'Posts\Collect\Action');
+Route::get('/favoritePosts', 'FavoritePosts\Collect\Action');
+Route::get('/freshPosts', 'FreshPosts\Collect\Action');
+Route::get('/popularPosts', 'PopularPosts\Collect\Action');
 Route::middleware('auth')->group(function () {
     Route::post('/likes', 'Likes\Post\Action');
     Route::delete('/likes', 'Likes\Delete\Action');

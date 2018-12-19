@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Posts\Collect;
+namespace App\Http\Controllers\FreshPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -11,12 +11,13 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('tags')
+            ->with('tags', 'likesCounter', 'likes')
             ->live()
             ->orderBy('publish_date', 'DESC')
-            ->simplePaginate(12);
+            ->simplePaginate(50);
 
         return view('posts.collect', [
+            'title' => 'Fresh Posts',
             'posts' => $posts,
         ]);
     }

@@ -2,6 +2,7 @@
 
 @section('content')
 <div class="container">
+    <h1 class="text-center">{{ $title }}</h1>
     <div class="row justify-content-center">
         <div class="col-md-8">
             @foreach ($posts as $post)
@@ -12,7 +13,7 @@
                         <div>
                             <cog-love-react-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-liked="@json(auth()->check() && $post->isLikedBy(auth()->id()))"
+                                :is-liked="@json(auth()->check() && auth()->user()->hasLiked($post))"
                             >
                                 <i class="fas fa-heart"></i>
                             </cog-love-react-component>
