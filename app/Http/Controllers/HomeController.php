@@ -23,6 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return redirect()->to('/posts');
+        return redirect()->to('/freshPosts');
     }
 }

@@ -34,7 +34,15 @@
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">
-
+                        <li class="nav-item">
+                            <a class="nav-link" href="/freshPosts">{{ __('Fresh Posts') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/popularPosts">{{ __('Popular Posts') }}</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/favoritePosts">{{ __('Favorite Posts') }}</a>
+                        </li>
                     </ul>
 
                     <!-- Right Side Of Navbar -->

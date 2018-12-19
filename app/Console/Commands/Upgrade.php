@@ -53,6 +53,7 @@ class Upgrade extends Command
 
     private function createReactionTypes(): void
     {
+        $this->info('Populating Reaction Types');
         $names = $this->collectLikeTypes();
         $weights = [
             'Like' => 1,
@@ -80,6 +81,7 @@ class Upgrade extends Command
 
     private function createReacters(): void
     {
+        $this->info('Populating Reacters');
         $classes = $this->collectLikerTypes();
         // TODO: Get User class from auth config
 
@@ -116,6 +118,7 @@ class Upgrade extends Command
 
     private function createReactants(): void
     {
+        $this->info('Populating Reactants');
         $classes = $this->collectLikeableTypes();
 
         $reactableClasses = [];
@@ -156,6 +159,7 @@ class Upgrade extends Command
 
     private function convertLikesToReactions(): void
     {
+        $this->info('Converting Likes & Dislikes to Reactions');
         /** @var \Illuminate\Database\Query\Builder $query */
         $query = DB::query();
         $likes = $query

@@ -1,5 +1,5 @@
 <template>
-    <span class="badge badge-info" v-text="count"></span>
+    <span class="badge" v-text="count"></span>
 </template>
 
 <script>

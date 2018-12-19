@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Posts\Collect;
+namespace App\Http\Controllers\PopularPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
@@ -11,12 +11,14 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->with('tags')
+            ->withReactionSummary()
+            ->with('tags', 'reactant.reactions.reacter.reacterable')
             ->live()
-            ->orderBy('publish_date', 'DESC')
-            ->simplePaginate(12);
+            ->orderBy('reactions_total_count', 'desc')
+            ->simplePaginate(50);
 
         return view('posts.collect', [
+            'title' => 'Popular Posts',
             'posts' => $posts,
         ]);
     }
