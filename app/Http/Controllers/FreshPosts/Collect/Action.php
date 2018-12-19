@@ -13,7 +13,7 @@ class Action extends Controller
         $posts = Post::query()
             ->with('tags', 'likesCounter', 'likes', 'dislikesCounter', 'dislikes')
             ->live()
-            ->orderBy('publish_date', 'DESC')
+            ->orderBy('publish_date', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [
