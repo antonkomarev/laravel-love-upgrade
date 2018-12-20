@@ -11,7 +11,7 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->withReactionTotal()
+            ->joinReactionTotal()
             ->with([
                 'tags',
                 'reactant.reactions.reacter.reacterable',

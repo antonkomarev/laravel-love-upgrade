@@ -12,7 +12,7 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->withReactionCounterOfType(ReactionType::fromName('Dislike'))
+            ->joinReactionCounterWithType(ReactionType::fromName('Dislike'))
             ->with([
                 'tags',
                 'reactant.reactions.reacter.reacterable',
