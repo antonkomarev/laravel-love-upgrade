@@ -15,10 +15,10 @@ class Action extends Controller
             ->joinReactionCounterWithType(ReactionType::fromName('Like'))
             ->with([
                 'tags',
-                'reactant.reactions.reacter.reacterable',
-                'reactant.reactions.type',
-                'reactant.reactionCounters',
-                'reactant.reactionTotal',
+                'loveReactant.reactions.reacter.reacterable',
+                'loveReactant.reactions.type',
+                'loveReactant.reactionCounters',
+                'loveReactant.reactionTotal',
             ])
             ->live()
             ->orderBy('reactions_count', 'desc')

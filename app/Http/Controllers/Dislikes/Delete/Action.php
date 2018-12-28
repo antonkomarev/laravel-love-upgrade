@@ -11,8 +11,8 @@ class Action extends Controller
 {
     public function __invoke(Request $request)
     {
-        $liker = $request->user()->getReacter();
-        $likeable = Post::query()->whereKey($request->input('post_id'))->firstOrFail()->getReactant();
+        $liker = $request->user()->getLoveReacter();
+        $likeable = Post::query()->whereKey($request->input('post_id'))->firstOrFail()->getLoveReactant();
         $reactionType = ReactionType::fromName('Dislike');
 
         try {

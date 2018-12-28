@@ -38,7 +38,7 @@
                             ></cog-love-reaction-total-component>
                         </div>
                         <div>
-                            @foreach ($post->getReactant()->getReactions() as $reaction)
+                            @foreach ($post->getLoveReactant()->getReactions() as $reaction)
                                 <span class="badge-pill @if (Love::isReactionOfTypeName($reaction, 'Like')) badge-success @elseif (Love::isReactionOfTypeName($reaction, 'Dislike')) badge-danger @endif">
                                     {{ $reaction->getReacter()->getReacterable()->name }}
                                 </span>

@@ -12,13 +12,13 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->whereReactedWithTypeBy($request->user()->getReacter(), ReactionType::fromName('Like'))
+            ->whereReactedWithTypeBy($request->user()->getLoveReacter(), ReactionType::fromName('Like'))
             ->with([
                 'tags',
-                'reactant.reactions.reacter.reacterable',
-                'reactant.reactions.type',
-                'reactant.reactionCounters',
-                'reactant.reactionTotal',
+                'loveReactant.reactions.reacter.reacterable',
+                'loveReactant.reactions.type',
+                'loveReactant.reactionCounters',
+                'loveReactant.reactionTotal',
             ])
             ->live()
             ->orderBy('publish_date', 'desc')
