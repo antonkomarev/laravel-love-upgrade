@@ -2,11 +2,11 @@
 
 namespace App\Models;
 
-use Cog\Contracts\Love\Likeable\Models\Likeable as LikeableContract;
-use Cog\Laravel\Love\Likeable\Models\Traits\Likeable;
+use Cog\Contracts\Love\Reactable\Models\Reactable as ReactableContract;
+use Cog\Laravel\Love\Reactable\Models\Traits\Reactable;
 use Wink\WinkPost;
 
-class Post extends WinkPost implements LikeableContract
+class Post extends WinkPost implements ReactableContract
 {
-    use Likeable;
+    use Reactable;
 }

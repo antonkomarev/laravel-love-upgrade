@@ -19,7 +19,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-
 Route::get('/freshPosts', 'FreshPosts\Collect\Action');
 Route::get('/mostLikedPosts', 'MostLikedPosts\Collect\Action');
 Route::get('/mostDislikedPosts', 'MostDislikedPosts\Collect\Action');

@@ -14,8 +14,8 @@
                         <div class="my-2">
                             <cog-love-reaction-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-reacted="@json(auth()->check() && auth()->user()->hasLiked($post))"
-                                :reaction-count="{{ $post->likesCount }}"
+                                :is-reacted="@json(Love::isReactableReactedByWithTypeName($post, auth()->user(), 'Like'))"
+                                :reaction-count="{{ Love::getReactableReactionsCountForTypeName($post, 'Like') }}"
                                 active-icon="fas fa-thumbs-up"
                                 inactive-icon="far fa-thumbs-up"
                                 button-class="btn btn-outline-success"
@@ -24,8 +24,8 @@
                             ></cog-love-reaction-component>
                             <cog-love-reaction-component
                                 uri="/dislikes/?post_id={{ $post->id }}"
-                                :is-reacted="@json(auth()->check() && auth()->user()->hasDisliked($post))"
-                                :reaction-count="{{ $post->dislikesCount }}"
+                                :is-reacted="@json(Love::isReactableReactedByWithTypeName($post, auth()->user(), 'Dislike'))"
+                                :reaction-count="{{ Love::getReactableReactionsCountForTypeName($post, 'Dislike') }}"
                                 active-icon="fas fa-thumbs-down"
                                 inactive-icon="far fa-thumbs-down"
                                 button-class="btn btn-outline-danger"
@@ -33,19 +33,14 @@
                                 inactive-text="Dislike"
                             ></cog-love-reaction-component>
                             <cog-love-reaction-total-component
-                                :count="{{ $post->likesAndDislikes->count() }}"
-                                :weight="{{ $post->likesDiffDislikesCount }}"
+                                :count="{{ Love::getReactableReactionsTotalCount($post) }}"
+                                :weight="{{ Love::getReactableReactionsTotalWeight($post) }}"
                             ></cog-love-reaction-total-component>
                         </div>
                         <div>
-                            @foreach ($post->collectLikers() as $liker)
-                                <span class="badge-pill badge-success">
-                                    {{ $liker->name }}
-                                </span>
-                            @endforeach
-                            @foreach ($post->collectDislikers() as $disliker)
-                                <span class="badge-pill badge-danger">
-                                    {{ $disliker->name }}
+                            @foreach ($post->getLoveReactant()->getReactions() as $reaction)
+                                <span class="badge-pill @if (Love::isReactionOfTypeName($reaction, 'Like')) badge-success @elseif (Love::isReactionOfTypeName($reaction, 'Dislike')) badge-danger @endif">
+                                    {{ $reaction->getReacter()->getReacterable()->name }}
                                 </span>
                             @endforeach
                         </div>

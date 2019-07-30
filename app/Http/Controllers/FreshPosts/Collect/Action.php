@@ -13,11 +13,10 @@ class Action extends Controller
         $posts = Post::query()
             ->with([
                 'tags',
-                'likes',
-                'dislikes',
-                'likesAndDislikes',
-                'likesCounter',
-                'dislikesCounter',
+                'loveReactant.reactions.reacter.reacterable',
+                'loveReactant.reactions.type',
+                'loveReactant.reactionCounters',
+                'loveReactant.reactionTotal',
             ])
             ->live()
             ->orderBy('publish_date', 'desc')
