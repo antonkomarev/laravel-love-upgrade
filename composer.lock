@@ -4,20 +4,20 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "90c9099714e82d6f53b29a50f599344d",
+    "content-hash": "10c6ce5a72570a7cc14ce91112763cee",
     "packages": [
         {
             "name": "cybercog/laravel-love",
-            "version": "6.2.1",
+            "version": "7.2.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/cybercog/laravel-love.git",
-                "reference": "d574ae886511c86421f2b5e12b41d53b567bf2a0"
+                "reference": "5934bb5abb96a36e01bb28103b5a510c024534ce"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/d574ae886511c86421f2b5e12b41d53b567bf2a0",
-                "reference": "d574ae886511c86421f2b5e12b41d53b567bf2a0",
+                "url": "https://api.github.com/repos/cybercog/laravel-love/zipball/5934bb5abb96a36e01bb28103b5a510c024534ce",
+                "reference": "5934bb5abb96a36e01bb28103b5a510c024534ce",
                 "shasum": ""
             },
             "require": {
@@ -37,10 +37,7 @@
                 "laravel": {
                     "providers": [
                         "Cog\\Laravel\\Love\\LoveServiceProvider"
-                    ],
-                    "aliases": {
-                        "Love": "Cog\\Laravel\\Love\\Facades\\Love"
-                    }
+                    ]
                 }
             },
             "autoload": {
@@ -89,7 +86,7 @@
                 "trait",
                 "undislike"
             ],
-            "time": "2019-06-13T22:52:39+00:00"
+            "time": "2019-07-11T12:47:53+00:00"
         },
         {
             "name": "dnoegel/php-xdg-base-dir",
