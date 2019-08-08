@@ -4,7 +4,6 @@ namespace App\Http\Controllers\MostDislikedPosts\Collect;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
-use Cog\Laravel\Love\ReactionType\Models\ReactionType;
 use Illuminate\Http\Request;
 
 class Action extends Controller
