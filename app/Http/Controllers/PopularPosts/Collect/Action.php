@@ -20,7 +20,7 @@ class Action extends Controller
                 'loveReactant.reactionTotal',
             ])
             ->live()
-            ->orderBy('reactions_total_weight', 'desc')
+            ->orderBy('reaction_total_weight', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [

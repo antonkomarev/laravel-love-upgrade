@@ -12,7 +12,7 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->joinReactionCounterOfType(ReactionType::fromName('Dislike'))
+            ->joinReactionCounterOfType('Dislike')
             ->with([
                 'tags',
                 'loveReactant.reactions.reacter.reacterable',
@@ -21,7 +21,7 @@ class Action extends Controller
                 'loveReactant.reactionTotal',
             ])
             ->live()
-            ->orderBy('reactions_count', 'desc')
+            ->orderBy('reaction_dislike_count', 'desc')
             ->simplePaginate(50);
 
         return view('posts.collect', [

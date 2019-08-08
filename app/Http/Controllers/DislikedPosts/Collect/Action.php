@@ -12,7 +12,7 @@ class Action extends Controller
     public function __invoke(Request $request)
     {
         $posts = Post::query()
-            ->whereReactedWithTypeBy($request->user()->getLoveReacter(), ReactionType::fromName('Dislike'))
+            ->whereReactedWithTypeBy($request->user(), 'Dislike')
             ->with([
                 'tags',
                 'loveReactant.reactions.reacter.reacterable',
