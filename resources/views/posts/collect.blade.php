@@ -14,7 +14,7 @@
                         <div class="my-2">
                             <cog-love-reaction-component
                                 uri="/likes/?post_id={{ $post->id }}"
-                                :is-reacted="@json(auth()->check() && $post->viaLoveReactant()->isReactedBy(auth()->user(), 'Like'))"
+                                :is-reacted="@json($post->viaLoveReactant()->isReactedBy(auth()->user(), 'Like'))"
                                 :reaction-count="{{ $post->viaLoveReactant()->getReactionCounterOfType('Like')->getCount() }}"
                                 active-icon="fas fa-thumbs-up"
                                 inactive-icon="far fa-thumbs-up"
@@ -24,7 +24,7 @@
                             ></cog-love-reaction-component>
                             <cog-love-reaction-component
                                 uri="/dislikes/?post_id={{ $post->id }}"
-                                :is-reacted="@json(auth()->check() && $post->viaLoveReactant()->isReactedBy(auth()->user(), 'Dislike'))"
+                                :is-reacted="@json($post->viaLoveReactant()->isReactedBy(auth()->user(), 'Dislike'))"
                                 :reaction-count="{{ $post->viaLoveReactant()->getReactionCounterOfType('Dislike')->getCount() }}"
                                 active-icon="fas fa-thumbs-down"
                                 inactive-icon="far fa-thumbs-down"
@@ -39,7 +39,7 @@
                         </div>
                         <div>
                             @foreach ($post->viaLoveReactant()->getReactions() as $reaction)
-                                <span class="badge-pill @if ($reaction->isOfType(\Cog\Laravel\Love\ReactionType\Models\ReactionType::fromName('Like'))) badge-success @elseif ($reaction->isOfType(\Cog\Laravel\Love\ReactionType\Models\ReactionType::fromName('Dislike'))) badge-danger @endif">
+                                <span class="badge-pill @if ($reaction->getType()->getName() === 'Like') badge-success @elseif ($reaction->getType()->getName() === 'Dislike') badge-danger @endif">
                                     {{ $reaction->getReacter()->getReacterable()->name }}
                                 </span>
                             @endforeach
